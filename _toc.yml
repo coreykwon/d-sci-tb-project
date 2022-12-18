@@ -5,6 +5,7 @@ root: intro
 parts:
   - caption: Markdown
     chapters:
+    - file: README
     - file: markdown
     - file: markdown-notebooks
   - caption: Jupyter Notebooks
