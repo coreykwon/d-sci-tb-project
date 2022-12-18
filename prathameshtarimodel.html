@@ -1,0 +1,1232 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Predicting Football Match Outcome &#8212; The Data Science Toolbox Assignment 8</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SECOND JUPYTER NOTEBOOK" href="jupyternb2.html" />
+    <link rel="prev" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/toolbox.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">The Data Science Toolbox Assignment 8</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Predicting Football Match Outcomes Using Machine Learning
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Markdown
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Jupyter Notebooks
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Predicting Football Match Outcome
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="jupyternb2.html">
+   SECOND JUPYTER NOTEBOOK
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/prathameshtarimodel.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fprathameshtarimodel.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/prathameshtarimodel.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Predicting Football Match Outcome
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#all-credits-to-prathamesh-tari-i-take-no-credit">
+   ALL CREDITS TO Prathamesh Tari, I TAKE NO CREDIT
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selecting-the-countries-of-interest">
+   Selecting the countries of interest
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#merge-the-leagues-with-corresponding-matches">
+   Merge the leagues with corresponding matches
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-results-of-the-match">
+   Adding results of the match
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separating-the-leagues">
+   Separating the leagues
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grouping-and-dividing-by-seasons">
+   Grouping and dividing by seasons
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-total-goals-scored-each-season">
+   Plotting total goals scored each season
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Predicting Football Match Outcome</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Predicting Football Match Outcome
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#all-credits-to-prathamesh-tari-i-take-no-credit">
+   ALL CREDITS TO Prathamesh Tari, I TAKE NO CREDIT
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selecting-the-countries-of-interest">
+   Selecting the countries of interest
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#merge-the-leagues-with-corresponding-matches">
+   Merge the leagues with corresponding matches
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-results-of-the-match">
+   Adding results of the match
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separating-the-leagues">
+   Separating the leagues
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grouping-and-dividing-by-seasons">
+   Grouping and dividing by seasons
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-total-goals-scored-each-season">
+   Plotting total goals scored each season
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="predicting-football-match-outcome">
+<h1>Predicting Football Match Outcome<a class="headerlink" href="#predicting-football-match-outcome" title="Permalink to this headline">#</a></h1>
+</section>
+<section id="all-credits-to-prathamesh-tari-i-take-no-credit">
+<h1>ALL CREDITS TO Prathamesh Tari, I TAKE NO CREDIT<a class="headerlink" href="#all-credits-to-prathamesh-tari-i-take-no-credit" title="Permalink to this headline">#</a></h1>
+<p>European Football or soccer is the world’s most popular team sport. It is played by over 150 million men and women of all ages in more than 200 countries [1].It is also one of the favorite sports for betting. The current estimations, which include both the illegal markets and the legal markets, suggest the sports match-betting industry is worth anywhere between 700bn and 1tn dollars a year [2].</p>
+<p>The bookies have their own prediction model and they get it right about 53% of the time [3]. Football pundit Mark Lawrenson had prediction accuracy of 52.6% [4]. The aim of this project is to build a system to predict the outcome using machine learning algorithms like Support Vector Machine, Naïve Bayes and logistic Regression.</p>
+</section>
+<section id="dataset">
+<h1>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">#</a></h1>
+<p>I am using two datasets for this project. The first dataset I got the data science community Kaggle <a class="reference external" href="https://www.kaggle.com/hugomathien/soccer">https://www.kaggle.com/hugomathien/soccer</a>. This dataset is used to perform exploratory data analysis. But this dataset has few missing data essential for prediction so the second dataset I am using is from <a class="reference external" href="http://football-data.co.uk/data.php">http://football-data.co.uk/data.php</a>. This dataset had more seasons and I am compiling these seasons into one and creating features to make prediction</p>
+<p>Initially I am performing Exploratory Data Analysis on the dataset I got from the Kaggle website.</p>
+<p>This dataset was in sqlite format and has tables of Country, League, Match, Player, Player Attributes, Team ,Team Attributes and sequences. It has information of more than 25000 matches, 10000 players, 11 European Countries with their lead championship from 2008 to 2016, Players and Teams attributes sourced from EA Sports’ FIFA video game series, betting odds from up to 10 providers</p>
+<p>I am only going to use the information from country, match, league and team for the EDA. This are the information which would be useful to understand the game.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">scipy</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;database.sqlite&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">con</span><span class="p">:</span>
+    <span class="n">countries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * from Country&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * from Match&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+    <span class="n">leagues</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * from League&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+    <span class="n">teams</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * from Team&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+    <span class="n">tempmatch</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * from Match&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+    <span class="n">matches3</span> <span class="o">=</span> <span class="n">matches2</span> <span class="o">=</span> <span class="n">matches</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="nn">File ~\miniconda3\lib\site-packages\IPython\core\interactiveshell.py:2309,</span> in <span class="ni">InteractiveShell.run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2307</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2308</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2309</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2310</span> <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~\miniconda3\lib\site-packages\IPython\core\magics\pylab.py:99,</span> in <span class="ni">PylabMagics.matplotlib</span><span class="nt">(self, line)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available matplotlib backends: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">backends_list</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">99</span>     <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">enable_matplotlib</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_show_matplotlib_backend</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+
+<span class="nn">File ~\miniconda3\lib\site-packages\IPython\core\interactiveshell.py:3458,</span> in <span class="ni">InteractiveShell.enable_matplotlib</span><span class="nt">(self, gui)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3437</span> <span class="k">def</span> <span class="nf">enable_matplotlib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3438</span>     <span class="sd">&quot;&quot;&quot;Enable interactive matplotlib and inline figure support.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3439</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">3440</span><span class="sd">     This takes the following steps:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3456</span><span class="sd">         display figures inline.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3457</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">3458</span>     <span class="kn">from</span> <span class="nn">matplotlib_inline.backend_inline</span> <span class="kn">import</span> <span class="n">configure_inline_support</span>
+<span class="g g-Whitespace">   </span><span class="mi">3460</span>     <span class="kn">from</span> <span class="nn">IPython.core</span> <span class="kn">import</span> <span class="n">pylabtools</span> <span class="k">as</span> <span class="n">pt</span>
+<span class="g g-Whitespace">   </span><span class="mi">3461</span>     <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">find_gui_and_backend</span><span class="p">(</span><span class="n">gui</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pylab_gui_select</span><span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">miniconda3</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">matplotlib_inline</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">backend_inline</span><span class="p">,</span> <span class="n">config</span>  <span class="c1"># noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.6&quot;</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">miniconda3</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">matplotlib_inline</span>\<span class="n">backend_inline</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="sd">&quot;&quot;&quot;A matplotlib backend for publishing figures via display_data&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Copyright (c) IPython Development Team.</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Distributed under the terms of the BSD 3-Clause License.</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">matplotlib.backends</span> <span class="kn">import</span> <span class="n">backend_agg</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matches</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+<span class="c1">#matches.describe()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="selecting-the-countries-of-interest">
+<h1>Selecting the countries of interest<a class="headerlink" href="#selecting-the-countries-of-interest" title="Permalink to this headline">#</a></h1>
+<p>First we will to select the countries of interest for our analysis. I am selecting England, Germany and Spain as these are the most popular and most watched leagues in football. These leagues are the most competitive league and it would give better understanding of the game.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main_countries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;England&#39;</span><span class="p">,</span><span class="s1">&#39;Germany&#39;</span><span class="p">,</span><span class="s1">&#39;Spain&#39;</span><span class="p">]</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">main_countries</span><span class="p">)]</span>
+<span class="n">leagues</span> <span class="o">=</span> <span class="n">countries</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">leagues</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;_y&#39;</span><span class="p">))</span>
+<span class="n">seasons</span> <span class="o">=</span> <span class="n">matches</span><span class="o">.</span><span class="n">season</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">leagues</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">006</span><span class="n">fbb2447f1</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">main_countries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;England&#39;</span><span class="p">,</span><span class="s1">&#39;Germany&#39;</span><span class="p">,</span><span class="s1">&#39;Spain&#39;</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">countries</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">main_countries</span><span class="p">)]</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">leagues</span> <span class="o">=</span> <span class="n">countries</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">leagues</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;_y&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">seasons</span> <span class="o">=</span> <span class="n">matches</span><span class="o">.</span><span class="n">season</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">leagues</span>
+
+<span class="ne">NameError</span>: name &#39;countries&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="merge-the-leagues-with-corresponding-matches">
+<h1>Merge the leagues with corresponding matches<a class="headerlink" href="#merge-the-leagues-with-corresponding-matches" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">req_matches</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="n">matches</span><span class="o">.</span><span class="n">league_id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">leagues</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])]</span>
+<span class="n">req_matches</span> <span class="o">=</span> <span class="n">req_matches</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;league_id&#39;</span><span class="p">,</span><span class="s1">&#39;home_team_api_id&#39;</span><span class="p">,</span><span class="s1">&#39;away_team_api_id&#39;</span><span class="p">,</span><span class="s1">&#39;home_team_goal&#39;</span><span class="p">,</span><span class="s1">&#39;away_team_goal&#39;</span><span class="p">,</span><span class="s1">&#39;season&#39;</span><span class="p">]]</span>
+<span class="n">req_matches</span><span class="p">[</span><span class="s2">&quot;total_goals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">req_matches</span><span class="p">[</span><span class="s1">&#39;home_team_goal&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">req_matches</span><span class="p">[</span><span class="s1">&#39;away_team_goal&#39;</span><span class="p">]</span>
+<span class="n">req_matches</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">req_matches</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-results-of-the-match">
+<h1>Adding results of the match<a class="headerlink" href="#adding-results-of-the-match" title="Permalink to this headline">#</a></h1>
+<p>As these dataset did not contain the result of the match we would add the results by comparing the home team goal and away team goal for that match. If the home team has more goals than the away team then the home team won the match and if not then the away team won the match. If both the goals are equal matche ended in draw. I am giving win as 1, draw as 0 and loss as -1 and then appended it to the table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">res</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;home_team_goal&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;away_team_goal&#39;</span><span class="p">]:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;home_team_goal&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;away_team_goal&#39;</span><span class="p">]:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">val</span>
+
+<span class="n">req_matches</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">req_matches</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">req_matches</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="separating-the-leagues">
+<h1>Separating the leagues<a class="headerlink" href="#separating-the-leagues" title="Permalink to this headline">#</a></h1>
+<p>The matches need to be separated and grouped by their leagues. A new dataframe for storing the separated leagues is created.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_matches</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">req_matches</span><span class="p">,</span><span class="n">leagues</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;league_id&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="n">new_matches</span> <span class="o">=</span> <span class="n">new_matches</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;id_x&#39;</span><span class="p">,</span><span class="s1">&#39;id_y&#39;</span><span class="p">,</span><span class="s1">&#39;country_id&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">english</span> <span class="o">=</span> <span class="n">new_matches</span><span class="p">[</span><span class="n">new_matches</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;England&quot;</span><span class="p">]</span>
+<span class="n">spanish</span> <span class="o">=</span> <span class="n">new_matches</span><span class="p">[</span><span class="n">new_matches</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Spain&quot;</span><span class="p">]</span>
+<span class="n">german</span> <span class="o">=</span> <span class="n">new_matches</span><span class="p">[</span><span class="n">new_matches</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Germany&quot;</span><span class="p">]</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">english</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">german</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">spanish</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="grouping-and-dividing-by-seasons">
+<h1>Grouping and dividing by seasons<a class="headerlink" href="#grouping-and-dividing-by-seasons" title="Permalink to this headline">#</a></h1>
+<p>Then dividing them by their seasons and storing them into new dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">english</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;season&#39;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">spanish</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;season&#39;</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">german</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;season&#39;</span><span class="p">)</span>
+<span class="n">seasons</span>
+<span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-total-goals-scored-each-season">
+<h1>Plotting total goals scored each season<a class="headerlink" href="#plotting-total-goals-scored-each-season" title="Permalink to this headline">#</a></h1>
+<p>We plot the total number of goals scored by all team in each season. We plot this on pyplot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Total goals in each season&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seasons</span><span class="p">)),</span><span class="n">seasons</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Season&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Total Goals Scored&quot;</span><span class="p">)</span>
+<span class="n">num_seasons</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seasons</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;English Premier League&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;German Bundesliga&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">s</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Spanish La Liga&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">seasons</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that the Spanish teams overall score more than the teams in Premier League and in Bundesliga. But the total goals in Bundesliga is low due to the fact that only 18 teams compete in the league. So each team in Bundesliga plays only 34 matches in a season whereas each team in premier league plays 38 matches. So the total games played in Premier League and La Liga is 380 whereas total games played in Bundesliga is 306.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plotting average goals scored each season</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seasons</span><span class="p">)),</span><span class="n">seasons</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Season&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average goals per game each season&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Average goals per game&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;English Premier League&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;German Bundesliga&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">s</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Spanish La Liga&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Bundesliga teams score way more on average in each game that the teams in other leagues. In the 2013/2014 season, Bundesliga teams scored more than 3 goals each game on an average (967 goals in 306 matches - 3.16 per match).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">average_goals_english</span> <span class="o">=</span> <span class="n">english</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">average_goals_spanish</span> <span class="o">=</span> <span class="n">spanish</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">average_goals_german</span> <span class="o">=</span> <span class="n">german</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1">#print(&quot;{:.2}&quot;.format(average_goals_english))</span>
+<span class="c1">#print(&quot;{:.2}&quot;.format(average_goals_spanish))</span>
+<span class="c1">#print(&quot;{:.2}&quot;.format(average_goals_german))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Merging Home team and matches</span>
+
+<span class="n">matches_h_teams</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">new_matches</span><span class="p">,</span><span class="n">teams</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;home_team_api_id&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;team_api_id&#39;</span><span class="p">)</span>
+<span class="n">matches_h_teams</span> <span class="o">=</span> <span class="n">matches_h_teams</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;team_api_id&#39;</span><span class="p">,</span><span class="s1">&#39;team_fifa_api_id&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">matches_h_teams</span> <span class="o">=</span> <span class="n">matches_h_teams</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;team_long_name&#39;</span><span class="p">:</span><span class="s1">&#39;home_team_long_name&#39;</span><span class="p">,</span><span class="s1">&#39;name_y&#39;</span><span class="p">:</span><span class="s1">&#39;league_name&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;country_name&#39;</span><span class="p">})</span>
+<span class="n">matches_h_teams</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_goal_scorers_home</span> <span class="o">=</span> <span class="n">matches_h_teams</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;home_team_long_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">top_goal_scorers_home</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline 
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">rects</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span> <span class="n">top_goal_scorers_home</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">align</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">top_goal_scorers_home</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">rotation</span> <span class="o">=</span> <span class="s2">&quot;vertical&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Top goal scorers at home&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of goals&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Team name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Merging Away team and matches</span>
+
+<span class="n">matches_a_teams</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">new_matches</span><span class="p">,</span><span class="n">teams</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;away_team_api_id&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;team_api_id&#39;</span><span class="p">)</span>
+<span class="n">matches_a_teams</span> <span class="o">=</span> <span class="n">matches_a_teams</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;team_api_id&#39;</span><span class="p">,</span><span class="s1">&#39;team_fifa_api_id&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">matches_a_teams</span> <span class="o">=</span> <span class="n">matches_a_teams</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;team_long_name&#39;</span><span class="p">:</span><span class="s1">&#39;away_team_long_name&#39;</span><span class="p">,</span><span class="s1">&#39;name_y&#39;</span><span class="p">:</span><span class="s1">&#39;league_name&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;country_name&#39;</span><span class="p">})</span>
+<span class="n">matches_a_teams</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_goal_scorers_away</span> <span class="o">=</span> <span class="n">matches_a_teams</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;away_team_long_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">total_goals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">top_goal_scorers_away</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline 
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">rects</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span> <span class="n">top_goal_scorers_away</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">align</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">top_goal_scorers_away</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">rotation</span> <span class="o">=</span> <span class="s2">&quot;vertical&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Top goal scorers at away&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of goals&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Team name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#select fields</span>
+<span class="n">matches</span> <span class="o">=</span> <span class="n">matches3</span><span class="p">[</span><span class="n">matches3</span><span class="o">.</span><span class="n">league_id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">leagues</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span>
+<span class="n">matches</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;country_id&#39;</span> <span class="p">,</span><span class="s1">&#39;league_id&#39;</span><span class="p">,</span> <span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="s1">&#39;stage&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;match_api_id&#39;</span><span class="p">,</span> <span class="s1">&#39;home_team_api_id&#39;</span><span class="p">,</span> <span class="s1">&#39;away_team_api_id&#39;</span><span class="p">,</span><span class="s1">&#39;B365H&#39;</span><span class="p">,</span> <span class="s1">&#39;B365D&#39;</span> <span class="p">,</span><span class="s1">&#39;B365A&#39;</span><span class="p">]]</span>
+<span class="n">matches</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">matches</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">entropy</span>
+
+<span class="k">def</span> <span class="nf">match_entropy</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="n">odds</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;B365H&#39;</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;B365D&#39;</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;B365A&#39;</span><span class="p">]]</span>
+    <span class="c1">#change odds to probability</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">o</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">odds</span><span class="p">]</span>
+    <span class="c1">#normalize to sum to 1</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">/</span><span class="n">norm</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">probs</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">entropy</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+
+<span class="c1">#compute match entropy</span>
+<span class="n">matches</span><span class="p">[</span><span class="s1">&#39;entropy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">matches</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">match_entropy</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#compute mean entropy for every league in every season</span>
+<span class="n">entropy_means</span> <span class="o">=</span> <span class="n">matches</span><span class="o">.</span><span class="n">groupby</span><span class="p">((</span><span class="s1">&#39;season&#39;</span><span class="p">,</span><span class="s1">&#39;league_id&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">entropy</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">entropy_means</span> <span class="o">=</span> <span class="n">entropy_means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;league_id&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;entropy&#39;</span><span class="p">)</span>
+<span class="n">entropy_means</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">leagues</span><span class="p">[</span><span class="n">leagues</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">entropy_means</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">entropy_means</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#plot graph</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">entropy_means</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="c1">#set title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Leagues Predictability&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1">#set ticks roatation</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1">#keep colors for next graph</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()]</span>
+<span class="n">colors_mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">leagues</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="n">colors</span><span class="p">))</span>
+
+<span class="c1">#remove x label</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1">#locate legend </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
+
+<span class="c1">#add arrows</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="mf">1.039</span><span class="p">),</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;, head_length=.7, head_width=.3&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">),</span><span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="mf">0.921</span><span class="p">),</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;, head_length=.7, head_width=.3&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;less predictable&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">7.3</span><span class="p">,</span> <span class="mf">1.028</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;more predictable&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">7.3</span><span class="p">,</span> <span class="mf">0.952</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
+
+<span class="c1">#plt.savefig(&#39;figures/leagues_pred.png&#39;, bbox_inches=&#39;tight&#39;,dpi=600)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Considering English Premier League</span>
+
+<span class="n">main_countries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;England&#39;</span><span class="p">]</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">main_countries</span><span class="p">)]</span>
+<span class="n">leagues</span> <span class="o">=</span> <span class="n">countries</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">leagues</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;_y&#39;</span><span class="p">))</span>
+<span class="n">seasons</span> <span class="o">=</span> <span class="n">matches</span><span class="o">.</span><span class="n">season</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">leagues</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Merge the leagues with corresponding matches</span>
+
+<span class="n">req_matches</span> <span class="o">=</span> <span class="n">matches2</span><span class="p">[</span><span class="n">matches2</span><span class="o">.</span><span class="n">league_id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">leagues</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])]</span>
+<span class="n">req_matches</span> <span class="o">=</span> <span class="n">req_matches</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;league_id&#39;</span><span class="p">,</span><span class="s1">&#39;home_team_api_id&#39;</span><span class="p">,</span><span class="s1">&#39;away_team_api_id&#39;</span><span class="p">,</span><span class="s1">&#39;home_team_goal&#39;</span><span class="p">,</span><span class="s1">&#39;away_team_goal&#39;</span><span class="p">,</span><span class="s1">&#39;season&#39;</span><span class="p">]]</span>
+<span class="n">req_matches</span><span class="p">[</span><span class="s2">&quot;total_goals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">req_matches</span><span class="p">[</span><span class="s1">&#39;home_team_goal&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">req_matches</span><span class="p">[</span><span class="s1">&#39;away_team_goal&#39;</span><span class="p">]</span>
+<span class="n">req_matches</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">req_matches</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">req_matches</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">req_matches</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_matches</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">req_matches</span><span class="p">,</span><span class="n">leagues</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;league_id&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="n">new_matches</span> <span class="o">=</span> <span class="n">new_matches</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;id_x&#39;</span><span class="p">,</span><span class="s1">&#39;id_y&#39;</span><span class="p">,</span><span class="s1">&#39;country_id&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">english</span> <span class="o">=</span> <span class="n">new_matches</span><span class="p">[</span><span class="n">new_matches</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;England&quot;</span><span class="p">]</span>
+
+<span class="c1"># sum_goals = new_group_matches.home_team_goal.sum()</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">english</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;season&#39;</span><span class="p">)</span>
+<span class="n">seasons</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plotting home scored each season</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seasons</span><span class="p">)),</span><span class="n">seasons</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Home goal each season&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Season&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Home-goals&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">home_team_goal</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;English Premier League&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plotting away scored each season</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seasons</span><span class="p">)),</span><span class="n">seasons</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Away goal each season&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Season&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Away-goals&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">away_team_goal</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;English Premier League&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plotting home/away scored each season</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seasons</span><span class="p">)),</span><span class="n">seasons</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Home-away goal ratio each season&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Season&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Home-goals to Away-goals ratio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">home_team_goal</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">e</span><span class="o">.</span><span class="n">away_team_goal</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;English Premier League&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Subsetting homewins vs homeloss from each of the leagues - ignoring draws.</span>
+<span class="n">e_hw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">true_divide</span><span class="p">(</span><span class="n">english</span><span class="p">[</span><span class="n">english</span><span class="o">.</span><span class="n">result</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;season&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">english</span><span class="p">[</span><span class="n">english</span><span class="o">.</span><span class="n">result</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;season&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1">#Plotting number of home wins vs home losses each season</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seasons</span><span class="p">)),</span><span class="n">seasons</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">120</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Number of home wins each vs home loss each season&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Season&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Home Wins vs loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_seasons</span><span class="p">,</span><span class="n">e_hw</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;English Premier League&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">e_hw</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read data from the CSV into a dataframe</span>
+
+<span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;Datasets</span><span class="se">\\</span><span class="s2">&quot;</span>
+
+<span class="n">raw_data_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2000-01.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2001-02.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2002-03.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2003-04.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2004-05.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_6</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2005-06.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_7</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2006-07.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_8</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2007-08.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_9</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2008-09.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_10</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2009-10.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_11</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2010-11.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_12</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2011-12.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_13</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2012-13.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_14</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2013-14.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_15</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2014-15.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data_16</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s1">&#39;2015-16.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Selecting the features</span>
+
+<span class="n">raw_data_1</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_2</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_3</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_4</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_5</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_6</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_7</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_8</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_9</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_10</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_11</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_12</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_13</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_14</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_15</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+<span class="n">raw_data_16</span> <span class="o">=</span><span class="n">raw_data_1</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTHG&#39;</span><span class="p">,</span><span class="s1">&#39;FTAG&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HTHG&#39;</span><span class="p">,</span><span class="s1">&#39;HTAG&#39;</span><span class="p">,</span><span class="s1">&#39;HTR&#39;</span><span class="p">,</span><span class="s1">&#39;HS&#39;</span><span class="p">,</span><span class="s1">&#39;AS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;AF&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span><span class="s1">&#39;HY&#39;</span><span class="p">,</span><span class="s1">&#39;AY&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;AR&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Concating the data on one dataframe</span>
+
+<span class="n">playing_stat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">raw_data_1</span><span class="p">,</span><span class="n">raw_data_2</span><span class="p">,</span><span class="n">raw_data_3</span><span class="p">,</span><span class="n">raw_data_4</span><span class="p">,</span><span class="n">raw_data_5</span><span class="p">,</span><span class="n">raw_data_6</span><span class="p">,</span><span class="n">raw_data_7</span><span class="p">,</span><span class="n">raw_data_8</span><span class="p">,</span><span class="n">raw_data_9</span><span class="p">,</span><span class="n">raw_data_10</span><span class="p">,</span><span class="n">raw_data_11</span><span class="p">,</span><span class="n">raw_data_12</span><span class="p">,</span><span class="n">raw_data_13</span><span class="p">,</span><span class="n">raw_data_14</span><span class="p">,</span><span class="n">raw_data_15</span><span class="p">,</span><span class="n">raw_data_16</span><span class="p">],</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating csv file from the merged dataframe</span>
+
+<span class="n">playing_stat</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s2">&quot;Merged_dataset.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Datasets</span><span class="se">\\</span><span class="s2">merged_dataset.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span><span class="s1">&#39;HGS&#39;</span><span class="p">,</span><span class="s1">&#39;AGS&#39;</span><span class="p">,</span><span class="s1">&#39;HAS&#39;</span><span class="p">,</span><span class="s1">&#39;AAS&#39;</span><span class="p">,</span><span class="s1">&#39;HGC&#39;</span><span class="p">,</span><span class="s1">&#39;AGC&#39;</span><span class="p">,</span><span class="s1">&#39;HDS&#39;</span><span class="p">,</span><span class="s1">&#39;ADS&#39;</span><span class="p">))</span>
+
+<span class="n">avg_home_scored</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">FTHG</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mf">6080.0</span>
+<span class="n">avg_away_scored</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">FTAG</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mf">6080.0</span>
+<span class="n">avg_home_conceded</span> <span class="o">=</span> <span class="n">avg_away_scored</span>
+<span class="n">avg_away_conceded</span> <span class="o">=</span> <span class="n">avg_home_scored</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avg_away_conceded</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_home</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">)</span>
+<span class="n">res_away</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">Team</span> <span class="o">=</span> <span class="n">res_home</span><span class="o">.</span><span class="n">HomeTeam</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="n">table</span><span class="o">.</span><span class="n">HGS</span> <span class="o">=</span> <span class="n">res_home</span><span class="o">.</span><span class="n">FTHG</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="n">table</span><span class="o">.</span><span class="n">HGC</span> <span class="o">=</span> <span class="n">res_home</span><span class="o">.</span><span class="n">FTAG</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="n">table</span><span class="o">.</span><span class="n">AGS</span> <span class="o">=</span> <span class="n">res_away</span><span class="o">.</span><span class="n">FTAG</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="n">table</span><span class="o">.</span><span class="n">AGC</span> <span class="o">=</span> <span class="n">res_away</span><span class="o">.</span><span class="n">FTHG</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="c1">#19 Home matches for each team each season and 16 seasons therefore 304 home matches and 304 away matches</span>
+<span class="n">table</span><span class="o">.</span><span class="n">HAS</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">HGS</span> <span class="o">/</span> <span class="mf">304.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_home_scored</span>
+<span class="n">table</span><span class="o">.</span><span class="n">AAS</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">AGS</span> <span class="o">/</span> <span class="mf">304.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_away_scored</span>
+<span class="n">table</span><span class="o">.</span><span class="n">HDS</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">HGC</span> <span class="o">/</span> <span class="mf">304.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_home_conceded</span>
+<span class="n">table</span><span class="o">.</span><span class="n">ADS</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">AGC</span> <span class="o">/</span> <span class="mf">304.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_away_conceded</span>
+
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Extract necessary features from the data file</span>
+<span class="n">feature_table</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="mi">23</span><span class="p">]</span>
+
+<span class="c1">#Full Time Result(FTR), Home Shots on Target(HST), Away Shots on Target(AST), Home Corners(HC), Away Corners(AC)</span>
+<span class="n">feature_table</span> <span class="o">=</span> <span class="n">feature_table</span><span class="p">[[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">,</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">,</span><span class="s1">&#39;FTR&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">]]</span>
+
+<span class="c1">#Home Attacking Strength(HAS), Home Defensive Strength(HDS), Away Attacking Strength(AAS), Away Defensive Strength(ADS)</span>
+<span class="n">f_HAS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">f_HDS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">f_AAS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">f_ADS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">feature_table</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">f_HAS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;Team&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">]][</span><span class="s1">&#39;HAS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">f_HDS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;Team&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;HomeTeam&#39;</span><span class="p">]][</span><span class="s1">&#39;HDS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">f_AAS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;Team&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">]][</span><span class="s1">&#39;AAS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">f_ADS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;Team&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;AwayTeam&#39;</span><span class="p">]][</span><span class="s1">&#39;ADS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">feature_table</span><span class="p">[</span><span class="s1">&#39;HAS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_HAS</span>
+<span class="n">feature_table</span><span class="p">[</span><span class="s1">&#39;HDS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_HDS</span>
+<span class="n">feature_table</span><span class="p">[</span><span class="s1">&#39;AAS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_AAS</span>
+<span class="n">feature_table</span><span class="p">[</span><span class="s1">&#39;ADS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_ADS</span>
+<span class="n">feature_table</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_table</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">loc</span> <span class="o">+</span> <span class="s2">&quot;Feature_table.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Function to transform FTR into numeric data type</span>
+<span class="k">def</span> <span class="nf">transformResult</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">FTR</span> <span class="o">==</span> <span class="s1">&#39;H&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">FTR</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_table</span><span class="p">[</span><span class="s2">&quot;Result&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_table</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">transformResult</span><span class="p">(</span><span class="n">row</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">feature_table</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Two sets of training sets - adding features.</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">feature_table</span><span class="p">[[</span><span class="s1">&#39;HAS&#39;</span><span class="p">,</span><span class="s1">&#39;HDS&#39;</span><span class="p">,</span><span class="s1">&#39;AAS&#39;</span><span class="p">,</span><span class="s1">&#39;ADS&#39;</span><span class="p">]]</span>
+<span class="n">X_train_2</span> <span class="o">=</span> <span class="n">feature_table</span><span class="p">[[</span><span class="s1">&#39;HAS&#39;</span><span class="p">,</span><span class="s1">&#39;HDS&#39;</span><span class="p">,</span><span class="s1">&#39;AAS&#39;</span><span class="p">,</span><span class="s1">&#39;ADS&#39;</span><span class="p">,</span><span class="s1">&#39;HST&#39;</span><span class="p">,</span><span class="s1">&#39;AST&#39;</span><span class="p">,</span><span class="s1">&#39;HC&#39;</span><span class="p">,</span><span class="s1">&#39;AC&#39;</span><span class="p">]]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">feature_table</span><span class="p">[</span><span class="s1">&#39;Result&#39;</span><span class="p">]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X_train_2</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h1>
+<p>It can be seen that when we include corners and shots in the feature we get a better output than without them. Support Vector Machine gives the best accuracy score without normalization.But after normalization there was an improvement in the Logistic Regression output. The betting accuracy of bookies was around 53% while the model created using SVM gave an accuracy of 61.29%. The accuracy can further increase if we could add more features like team form or player form. We could also add the twitter analysis for prediction. We could implement different model like xgboost with the same features which could improve the accuracy.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="markdown-notebooks.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Notebooks with MyST Markdown</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="jupyternb2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SECOND JUPYTER NOTEBOOK</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corey Kwon<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
