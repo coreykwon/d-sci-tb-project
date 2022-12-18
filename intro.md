@@ -1,11 +1,10 @@
-# Welcome to your Jupyter Book
+# Predicting Football Match Outcomes Using Machine Learning
+## Credits to prathameshtari
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+The datasets appear to be taken from kaggle. 
 
-Check out the content pages bundled with this sample book to see more.
+It has tables of Country, League, Match, Player, Player Attributes, Team, Team Attributes and sequences. It has information of more than 25000 matches, 10000 players, 11 European Countries with their lead championship from 2008 to 2016, Players and Teams attributes sourced from EA Sports' FIFA video game series, betting odds from up to 10 providers.
 
-```{tableofcontents}
-```
+Data is also taken from the football-data.co.uk website.
+
+Match outcomes are then predicted using machine learning models made by prathameshtari.
