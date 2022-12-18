@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
-    <link rel="prev" title="Predicting Football Match Outcomes Using Machine Learning" href="intro.html" />
+    <link rel="prev" title="Assignment 8 - Corey Kwon" href="README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -119,6 +121,11 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="README.html">
+   Assignment 8 - Corey Kwon
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Markdown Files
@@ -324,8 +331,28 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#block-math-equations">
+   2 block math equations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-blocks">
+   2 code blocks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-files">
+   2 image files
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#margin-content">
+   Margin content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-myst">
-   What is MyST?
+   What is MyST
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -363,8 +390,28 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#block-math-equations">
+   2 block math equations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-blocks">
+   2 code blocks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-files">
+   2 image files
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#margin-content">
+   Margin content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-myst">
-   What is MyST?
+   What is MyST
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -398,8 +445,51 @@ title="Print to PDF"
 in regular markdown files (<code class="docutils literal notranslate"><span class="pre">.md</span></code>), you’ll write in the same flavor of markdown
 called <strong>MyST Markdown</strong>.
 This is a simple file to help you get started and show off some syntax.</p>
+<section id="block-math-equations">
+<h2>2 block math equations<a class="headerlink" href="#block-math-equations" title="Permalink to this headline">#</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\nabla \cdot \vec{E} &amp;= \frac{\rho}{\epsilon_0} \\
+\nabla \times \vec{E} &amp;= -\frac{\partial \vec{B}}{\partial t}
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+F &amp;= ma \\
+\vec{F} &amp;= m\vec{a}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="code-blocks">
+<h2>2 code blocks<a class="headerlink" href="#code-blocks" title="Permalink to this headline">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print a string</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="image-files">
+<h2>2 image files<a class="headerlink" href="#image-files" title="Permalink to this headline">#</a></h2>
+<p><img alt="football" src="_images/football.png" />
+<img alt="toolbox" src="_images/toolbox.png" /></p>
+</section>
+<section id="margin-content">
+<h2>Margin content<a class="headerlink" href="#margin-content" title="Permalink to this headline">#</a></h2>
+<blockquote>
+<div><p>This is some margin content. It will be displayed in a block with a grey background and a left margin.</p>
+<p>You can include multiple lines of text in the margin content by separating them with a new line.</p>
+<p>Margin content is often used to highlight important information or to quote someone else’s words.</p>
+</div></blockquote>
+</section>
 <section id="what-is-myst">
-<h2>What is MyST?<a class="headerlink" href="#what-is-myst" title="Permalink to this headline">#</a></h2>
+<h2>What is MyST<a class="headerlink" href="#what-is-myst" title="Permalink to this headline">#</a></h2>
 <p>MyST stands for “Markedly Structured Text”. It
 is a slight variation on a flavor of markdown called “CommonMark” markdown,
 with small syntax extensions to allow you to write <strong>roles</strong> and <strong>directives</strong>
@@ -474,11 +564,11 @@ You can learn a lot more at <a class="reference external" href="https://jupyterb
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="README.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Predicting Football Match Outcomes Using Machine Learning</p>
+            <p class="prev-next-title">Assignment 8 - Corey Kwon</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="markdown-notebooks.html" title="next page">

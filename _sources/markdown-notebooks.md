@@ -19,6 +19,49 @@ Jupyter Book also lets you write text-based notebooks using MyST Markdown.
 See [the Notebooks with MyST Markdown documentation](https://jupyterbook.org/file-types/myst-notebooks.html) for more detailed instructions.
 This page shows off a notebook written in MyST Markdown.
 
+## 2 block math equations
+
+$$
+\begin{aligned}
+\nabla \cdot \vec{E} &= \frac{\rho}{\epsilon_0} \\
+\nabla \times \vec{E} &= -\frac{\partial \vec{B}}{\partial t}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+F &= ma \\
+\vec{F} &= m\vec{a}
+\end{aligned}
+$$
+
+## 2 code blocks
+
+```
+# Print a string
+print("Hello, World!")
+```
+
+```
+x = 3
+y = 4
+sum = x + y
+print(sum)
+```
+
+## 2 image files
+
+![football](football.png)
+![toolbox](toolbox.png)
+
+## Margin content
+
+> This is some margin content. It will be displayed in a block with a grey background and a left margin.
+>
+> You can include multiple lines of text in the margin content by separating them with a new line.
+>
+> Margin content is often used to highlight important information or to quote someone else's words.
+
 ## An example cell
 
 With MyST Markdown, you can define code cells with a directive like so:
